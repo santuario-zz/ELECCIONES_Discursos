@@ -9,7 +9,7 @@
  * ¿Qué tan similares fueron los discuros de inicio de campaña? ¿Qué tan diferentes son?
  *
  * Source: https://www.animalpolitico.com/2018/03/discursos-candidatos-presidenciales/
- * Test: https://santuario.github.io/KLUSTERA_Residente/
+ * Test: https://santuario.github.io/ELECCIONES_Discursos/
  *
  */
 
@@ -33,14 +33,25 @@ var STATUS;
 var waitWordTime = 30;
 
 // Data
-var residenteSongs = ["tierra", "hermano"];
-var calle13Songs = ["mundo", "universal"];
-var calle13ResidenteSongs = ["podemos", "ser"];
+var anayaSongs = ["amigo", "soñamos", "soluciones", "compartir", "generación", "reunidos", "oportunidades", "propuesta"];
+var meadeSongs = ["creo", "avanzar", "ganar", "futuro", "familia", "educación"];
+var lopezSongs = ["desarrollo", "ciudad", "libre","juárez","económico","precios","industria","estados", "bienestar", "muro"];
+var zavalaSongs = ["conformemos", "confío", "valores", "libertad", "alegría", "dignidad", "esperanza"];
+var allSongs = ["méxico", "nuestro", "campaña", "fuerza", "país", "construir", "jóvenes","corrupción", "gente", "impunidad"];
 
-var calle13ResidenteSongsCount = 0;
-var calle13SongsCount = 0;
-var residenteSongsCount = 0;
+var allSongsCount = 0;
+var anayaCount = 0;
+var meadeCount = 0;
+var lopezCount = 0;
+var zavalaCount = 0;
 
+
+//Text
+var txt = [];
+var counts = {};
+var keys = [];
+var files = ['Ricardo_Anaya.txt','Andres_Manuel_Lopez_Obrador.txt','Jose_Antonio_Meade.txt','Margarita_Zavala.txt'];
+var allWords = [];
 
 /*
  *****************************************
@@ -57,6 +68,10 @@ function preload() {
   geoMidFont = loadFont('assets/fonts/Geogtq-Md.otf');
   geoSmallFont = loadFont('assets/fonts/Geogtq-Ul.otf');
 
+  //Text
+  for (var i = 0; i < files.length; i++) {
+    txt[i] = loadStrings('assets/data/' + files[i]);
+  }
 
 
 }
@@ -95,6 +110,7 @@ function draw() {
 
 
 function initialize() {
+  initializeText();
   initializeStatus();
   initializeHeader();
   setStatus("VS");
@@ -229,31 +245,43 @@ function drawStatusVS() {
 
 
   if (frameCount % waitWordTime == 0) {
-    calle13SongsCount++;
-    residenteSongsCount++;
+    anayaCount++;
+    meadeCount++;
+    lopezCount++;
+    zavalaCount++;
   }
 
 
-  if (calle13SongsCount >= calle13Songs.length) {
-    calle13SongsCount = 0;
+  if (anayaCount >= anayaSongs.length) {
+    anayaCount = 0;
   }
 
-  if (residenteSongsCount >= residenteSongs.length) {
-    residenteSongsCount = 0;
+  if (meadeCount >= meadeSongs.length) {
+    meadeCount = 0;
   }
+
+  if (lopezCount >= lopezSongs.length) {
+    lopezCount = 0;
+  }
+
+  if (zavalaCount >= zavalaSongs.length) {
+    zavalaCount = 0;
+  }
+
+
 
 
 
 
 
   //Anaya
-  text(residenteSongs[residenteSongsCount], (windowWidth / 2), (1*windowHeight / 8));
+  text(anayaSongs[anayaCount], (windowWidth / 2), (1 * windowHeight / 8));
   //Meade
-  text(calle13Songs[calle13SongsCount], (windowWidth / 2), (3 * windowHeight / 8));
+  text(meadeSongs[meadeCount], (windowWidth / 2), (3 * windowHeight / 8));
   //Obrador
-  text(calle13Songs[calle13SongsCount], (windowWidth / 2), (5 * windowHeight / 8));
+  text(lopezSongs[lopezCount], (windowWidth / 2), (5 * windowHeight / 8));
   //Zavala
-  text(calle13Songs[calle13SongsCount], (windowWidth / 2), (7 * windowHeight / 8));
+  text(zavalaSongs[zavalaCount], (windowWidth / 2), (7 * windowHeight / 8));
 
 
 }
@@ -280,16 +308,16 @@ function drawStatusPLUS() {
 
 
   if (frameCount % waitWordTime == 0) {
-    calle13ResidenteSongsCount++;
+    allSongsCount++;
   }
 
 
-  if (calle13ResidenteSongsCount >= calle13ResidenteSongs.length) {
-    calle13ResidenteSongsCount = 0;
+  if (allSongsCount >= allSongs.length) {
+    allSongsCount = 0;
   }
   fill(255);
   //print(calle13ResidenteSongsCount);
-  text(calle13ResidenteSongs[calle13ResidenteSongsCount], (windowWidth / 2), (windowHeight / 2));
+  text(allSongs[allSongsCount], (windowWidth / 2), (windowHeight / 2));
 
 
 
@@ -297,6 +325,108 @@ function drawStatusPLUS() {
 
 
 
+/*
+ *****************************************
+ *****************************************
+ * TEXT METHODS
+ *****************************************
+ *****************************************
+ */
+
+function initializeText() {
+
+
+  for (var i = 0; i < txt.length; i++) {
+    allWords[i] = txt[i].join(" ");
+  }
+
+  //print(allWords[0]);
+
+
+  //var tokens = allWords[0].split(/\W+/);// English
+  var tokens = allWords[0].split(" "); // Using First text
+  //print(tokens.length);
+  for (var i = 0; i < tokens.length; i++) {
+    var word = tokens[i].toLowerCase();
+    if (counts[word] === undefined) {
+      counts[word] = {
+        tf: 1,
+        df: 1
+      };
+      keys.push(word);
+    } else {
+      counts[word].tf = counts[word].tf + 1;
+    }
+  }
+
+
+  var otherCounts = [];
+  for (var j = 1; j < allWords.length; j++) {
+    var tmpCounts = {};
+    var tokens = allWords[j].split(" ");
+    for (var k = 0; k < tokens.length; k++) {
+      var w = tokens[k].toLowerCase();
+      if (tmpCounts[w] === undefined) {
+        tmpCounts[w] = true;
+      }
+    }
+    otherCounts.push(tmpCounts);
+  }
+
+
+  for (var i = 0; i < keys.length; i++) {
+    var word = keys[i];
+    for (var j = 0; j < otherCounts.length; j++) {
+      var tmpCounts = otherCounts[j];
+      if (tmpCounts[word]) {
+        counts[word].df++;
+      }
+
+    }
+
+  }
+
+
+  for (var i = 0; i < keys.length; i++) {
+    var word = keys[i];
+
+
+    var wordObj = counts[word];
+    wordObj.tfidf = wordObj.tf*log(files.length/wordObj.df);
+
+
+  }
+
+
+
+
+
+
+  keys.sort(compare);
+
+
+  function compare(a, b) {
+
+    var countA = counts[a].tfidf;
+    var countB = counts[b].tfidf;
+    return countB - countA;
+  }
+
+
+  for (var i = 0; i < keys.length; i++) {
+    var tmpkey = keys[i];
+    print(tmpkey + " " + counts[tmpkey].tfidf);
+  }
+
+
+}
+
+
+
+function drawText() {
+
+
+}
 
 
 /*
