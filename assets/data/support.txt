@@ -1,0 +1,144 @@
+ya empezaron las campañas... y pues, analicé los discursos con un algoritmo Tf-idf y ésto pasó: ¿qué dijeron los candidatos en sus discursos?, ¿qué tan similares o diferentes fueron?: 
+
+
+
+
+
+la frase más repetida de josé antonio meade fue: "en mi gobierno"… además, fue el único es decir “pido que voten por mí” (o alguna de sus variantes).
+
+la frase más repetida de amlo fue: "la corrupción" y "en todo el país"
+
+la frase más repetida de ricardo anaya fue: "nosotros no nos vamos a resignar" y "el méxico que soñamos"
+
+
+la frase más repetida de margarita zavala fue: "no nos conformemos" y "nuestro país pierde"
+
+
+
+
+¿quién mencionó a los jóvenes?
+
+ricardo anaya [10], josé antonio meade [2], amlo [3], margarita zavala [2]
+
+
+¿quién mencionó a la cultura?
+
+ricardo anaya [0], josé antonio meade [1], amlo [6], margarita zavala [0]
+
+
+¿quién mencionó a la corrupción?
+
+ricardo anaya [1], josé antonio meade [4], amlo [11], margarita zavala [2]
+
+
+¿quién mencionó a la inseguridad?
+
+ricardo anaya [2], josé antonio meade [1], amlo [3], margarita zavala [0]
+
+
+¿quién mencionó a la ciencia?
+
+ricardo anaya [0], josé antonio meade [0], amlo [0], margarita zavala [0]
+
+
+¿quién mencionó a la gasolina?
+
+ricardo anaya [0], josé antonio meade [0], amlo [2], margarita zavala [0]
+
+
+¿quién mencionó los impuestos?
+
+ricardo anaya [0], josé antonio meade [0], amlo [5], margarita zavala [0]
+
+
+¿quién mencionó la familia?
+
+ricardo anaya [2], josé antonio meade [11], amlo [5], margarita zavala [0]
+
+
+¿quién mencionó nuestros salarios?
+
+ricardo anaya [0], josé antonio meade [2], amlo [7], margarita zavala [0]
+
+¿quién mencionó a la innovación?
+
+ricardo anaya [0], josé antonio meade [0], amlo [0], margarita zavala [1]
+
+
+¿quién mencionó la palabra incluyente?
+
+ricardo anaya [0], josé antonio meade [0], amlo [0], margarita zavala [1]
+
+
+
+¿quién mencionó a la pobreza?
+
+ricardo anaya [1], josé antonio meade [1], amlo [2], margarita zavala [1]
+
+
+
+¿quién mencionó a las mujeres?
+
+ricardo anaya [0], josé antonio meade [8], amlo [2], margarita zavala [2]
+
+
+¿quién habló de desigualdad?
+
+ricardo anaya [1], josé antonio meade [1], amlo [0], margarita zavala [1]
+
+
+¿quién habló de impunidad?
+
+ricardo anaya [1], josé antonio meade [1], amlo [4], margarita zavala [1]
+
+
+¿quién habló del famoso muro?
+
+ricardo anaya [0], josé antonio meade [0], amlo [1], margarita zavala [0]
+
+
+
+¿quién habló del desarrollo?
+
+ricardo anaya [0], josé antonio meade [0], amlo [13], margarita zavala [0]
+
+
+¿quién habló de la economía?
+
+ricardo anaya [0], josé antonio meade [0], amlo [8], margarita zavala [1]
+
+
+¿quién habló del comercio?
+
+ricardo anaya [0], josé antonio meade [0], amlo [3], margarita zavala [0]
+
+
+¿quién habló de la frontera?
+
+ricardo anaya [0], josé antonio meade [0], amlo [3], margarita zavala [0]
+
+
+¿quién habló de exportaciones?
+
+ricardo anaya [0], josé antonio meade [0], amlo [3], margarita zavala [0]
+
+
+
+¿quién habló de violencia?
+
+ricardo anaya [2], josé antonio meade [1], amlo [4], margarita zavala [0]
+
+
+
+¿quién habló de la educación?
+
+ricardo anaya [0], josé antonio meade [6], amlo [2], margarita zavala [0]
+
+
+¿quién mencionó el narcotráfico?
+
+ricardo anaya [0], josé antonio meade [0], amlo [1], margarita zavala [0]
+
+
+
+

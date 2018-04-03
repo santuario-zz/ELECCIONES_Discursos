@@ -34,11 +34,11 @@ var STATUS;
 var waitWordTime = 30;
 
 // Data
-var anayaSongs = ["amigo", "soñamos", "soluciones", "compartir", "generación", "reunidos", "oportunidades", "propuesta"];
-var meadeSongs = ["creo", "avanzar", "ganar", "futuro", "familia", "educación"];
-var lopezSongs = ["desarrollo", "ciudad", "libre", "juárez", "económico", "precios", "industria", "estados", "bienestar", "muro"];
-var zavalaSongs = ["conformemos", "confío", "valores", "libertad", "alegría", "dignidad", "esperanza"];
-var allSongs = ["méxico", "nuestro", "campaña", "fuerza", "país", "construir", "jóvenes", "corrupción", "gente", "impunidad"];
+var anayaSongs = ["amigo","hackaton", "soñamos", "soluciones", "compartir", "generación", "reunidos", "oportunidades", "propuesta", "generación", "don gabriel"];
+var meadeSongs = ["creo", "avanzar", "ganar", "futuro", "familia", "adelante", "garantizaremos", "instituciones", "vamos"];
+var lopezSongs = ["desarrollo", "ciudad", "libre", "juárez", "económico", "precios", "industria", "estados", "bienestar", "muro", "impuestos", "TLC", "frontera", "exportaciones"];
+var zavalaSongs = ["conformemos", "confío", "valores", "libertad", "alegría", "dignidad", "esperanza", "demagogia", "alegría"];
+var allSongs = ["méxico", "nuestro", "campaña", "fuerza", "país", "construir", "jóvenes", "corrupción", "gente", "impunidad", "pobreza"];
 
 var allSongsCount = 0;
 var anayaCount = 0;
@@ -48,13 +48,13 @@ var zavalaCount = 0;
 
 
 //Images
-var avatarImages = ["Anaya_AvatarWatercolor_MASTER_W.png", "Lopez_AvatarWatercolor_MASTER_W.png", "Meade_AvatarWatercolor_MASTER_W.png", "Zavala_AvatarWatercolor_MASTER_W.png"];
+var avatarImages = ["Anaya_AvatarWatercolor_MASTER_W.png","Lopez_AvatarWatercolor_MASTER_W.png", "Meade_AvatarWatercolor_MASTER_W.png", "Zavala_AvatarWatercolor_MASTER_W.png"];
 var img = [];
 //Text
 var txt = [];
 var counts = {};
 var keys = [];
-var files = ['Ricardo_Anaya.txt', 'Andres_Manuel_Lopez_Obrador.txt', 'Jose_Antonio_Meade.txt', 'Margarita_Zavala.txt'];
+var files = ['Jose_Antonio_Meade.txt','Margarita_Zavala.txt','Ricardo_Anaya.txt','Andres_Manuel_Lopez_Obrador.txt'];
 var allWords = [];
 
 /*
@@ -241,11 +241,11 @@ function drawStatusVS() {
 
   //fill(0, 164, 92, 150);
   rect(0, 1 * (windowHeight / 4), windowWidth, (windowHeight / 4));
-  image(img[2], posX, 1 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
+  image(img[1], posX, 1 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
 
   //fill(96, 12, 19, 150);
   rect(0, 2 * (windowHeight / 4), windowWidth, (windowHeight / 4));
-  image(img[1], posX, 2 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
+  image(img[2], posX, 2 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
 
   //fill(83, 53, 100, 150);
   rect(0, 3 * (windowHeight / 4), windowWidth, (windowHeight / 4));
@@ -296,10 +296,10 @@ function drawStatusVS() {
 
   //Anaya
   text(anayaSongs[anayaCount], (windowWidth / 2), (1 * windowHeight / 8));
+  //AMLO
+  text(lopezSongs[lopezCount], (windowWidth / 2), (3 * windowHeight / 8));
   //Meade
-  text(meadeSongs[meadeCount], (windowWidth / 2), (3 * windowHeight / 8));
-  //Obrador
-  text(lopezSongs[lopezCount], (windowWidth / 2), (5 * windowHeight / 8));
+  text(meadeSongs[meadeCount], (windowWidth / 2), (5 * windowHeight / 8));
   //Zavala
   text(zavalaSongs[zavalaCount], (windowWidth / 2), (7 * windowHeight / 8));
 
@@ -436,7 +436,7 @@ function initializeText() {
 
   for (var i = 0; i < keys.length; i++) {
     var tmpkey = keys[i];
-    print(tmpkey + " " + counts[tmpkey].tfidf);
+    //print(tmpkey + " " + counts[tmpkey].tfidf);
   }
 
 
@@ -466,7 +466,7 @@ function mouseClicked() {
   // print(((windowWidth / 2) - mouseX) + " :: " + mouseX + " , " + ((windowHeight / 2) - mouseY) + " :: " + mouseY);
 
   //print(((windowWidth / 2) - mouseX) + "," + ((windowHeight / 2) - mouseY));
-  print(mouseX + ", " + mouseY)
+  //print(mouseX + ", " + mouseY)
 
   //print(progressMouseX);
 
