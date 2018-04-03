@@ -10,6 +10,7 @@
  *
  * Source: https://www.animalpolitico.com/2018/03/discursos-candidatos-presidenciales/
  * Test: https://santuario.github.io/ELECCIONES_Discursos/
+ * Add: https://www.online-utility.org/text/analyzer.jsp
  *
  */
 
@@ -35,9 +36,9 @@ var waitWordTime = 30;
 // Data
 var anayaSongs = ["amigo", "soñamos", "soluciones", "compartir", "generación", "reunidos", "oportunidades", "propuesta"];
 var meadeSongs = ["creo", "avanzar", "ganar", "futuro", "familia", "educación"];
-var lopezSongs = ["desarrollo", "ciudad", "libre","juárez","económico","precios","industria","estados", "bienestar", "muro"];
+var lopezSongs = ["desarrollo", "ciudad", "libre", "juárez", "económico", "precios", "industria", "estados", "bienestar", "muro"];
 var zavalaSongs = ["conformemos", "confío", "valores", "libertad", "alegría", "dignidad", "esperanza"];
-var allSongs = ["méxico", "nuestro", "campaña", "fuerza", "país", "construir", "jóvenes","corrupción", "gente", "impunidad"];
+var allSongs = ["méxico", "nuestro", "campaña", "fuerza", "país", "construir", "jóvenes", "corrupción", "gente", "impunidad"];
 
 var allSongsCount = 0;
 var anayaCount = 0;
@@ -46,11 +47,14 @@ var lopezCount = 0;
 var zavalaCount = 0;
 
 
+//Images
+var avatarImages = ["Anaya_AvatarWatercolor_MASTER_W.png", "Lopez_AvatarWatercolor_MASTER_W.png", "Meade_AvatarWatercolor_MASTER_W.png", "Zavala_AvatarWatercolor_MASTER_W.png"];
+var img = [];
 //Text
 var txt = [];
 var counts = {};
 var keys = [];
-var files = ['Ricardo_Anaya.txt','Andres_Manuel_Lopez_Obrador.txt','Jose_Antonio_Meade.txt','Margarita_Zavala.txt'];
+var files = ['Ricardo_Anaya.txt', 'Andres_Manuel_Lopez_Obrador.txt', 'Jose_Antonio_Meade.txt', 'Margarita_Zavala.txt'];
 var allWords = [];
 
 /*
@@ -73,6 +77,10 @@ function preload() {
     txt[i] = loadStrings('assets/data/' + files[i]);
   }
 
+  for (var i = 0; i < avatarImages.length; i++) {
+    img[i] = loadImage('assets/images/' + avatarImages[i]);
+  }
+
 
 }
 
@@ -92,6 +100,7 @@ function setup() {
 }
 
 function draw() {
+  background(255);
 
   drawStatus();
   drawHeader();
@@ -139,12 +148,13 @@ function drawHeader() {
   textAlign(LEFT, TOP);
   noStroke();
   //Title
+  fill(50);
   textFont(geoSmallFont);
   textSize(14);
-  text("Anaya vs. Meade vs. Obrador vs. Zavala", 10, 10);
-  text("Anaya  +  Meade  +  Obrador  +  Zavala", 10, 34);
+  text("anaya vs. meade vs. obrador vs. zavala", 10, 10);
+  text("anaya  +  meade  +  obrador  +  zavala", 10, 34);
 
-  stroke(255);
+  stroke(220);
 
   if (isInsideButtonVS(mouseX, mouseY)) { //VS
     line(10, 28, 230, 28);
@@ -215,28 +225,38 @@ function setStatus(_status) {
 }
 
 function drawStatusVS() {
-  background(0, 83, 148);
-  stroke(255);
-  line(10, 28, 230, 28);
+  fill(255);
+
   //var correctionXS = (windowWidth / 2) - (backgroundImage.width / 2);
   //var correctionYS = (windowHeight / 2) - (backgroundImage.height / 2);
   noStroke();
-  fill(0, 164, 92);
-  rect(0, (windowHeight / 4), windowWidth, (windowHeight / 4));
 
-  fill(96, 12, 19);
+  //fill(0, 83, 148, 150);
+  var correctionX = abs(((windowWidth / 4) - (windowWidth / 5)) / 2);
+  var correctionY = abs(((windowHeight / 4) - (windowHeight / 5)) / 2);
+  var posX = windowWidth - (windowWidth / 5) - correctionX;
+  rect(0, 0, windowWidth, (windowHeight / 4));
+  image(img[0], posX, 0 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
+
+
+  //fill(0, 164, 92, 150);
+  rect(0, 1 * (windowHeight / 4), windowWidth, (windowHeight / 4));
+  image(img[2], posX, 1 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
+
+  //fill(96, 12, 19, 150);
   rect(0, 2 * (windowHeight / 4), windowWidth, (windowHeight / 4));
+  image(img[1], posX, 2 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
 
-  fill(83, 53, 100);
+  //fill(83, 53, 100, 150);
   rect(0, 3 * (windowHeight / 4), windowWidth, (windowHeight / 4));
+  image(img[3], posX, 3 * (windowHeight / 4) + correctionY, (windowHeight / 5), (windowHeight / 5));
 
 
 
 
 
-  fill(255);
+  fill(50);
   textAlign(CENTER, CENTER);
-  noStroke();
   textFont(geoSmallFont);
 
 
@@ -283,16 +303,17 @@ function drawStatusVS() {
   //Zavala
   text(zavalaSongs[zavalaCount], (windowWidth / 2), (7 * windowHeight / 8));
 
-
+  stroke(50);
+  line(10, 28, 230, 28);
 }
 
 
 function drawStatusPLUS() {
-  background(28, 36, 76);
-  stroke(255);
+  //background(28, 36, 76);
+  stroke(50);
   line(10, 52, 230, 52);
 
-  fill(255);
+  fill(50);
   textAlign(CENTER, CENTER);
   noStroke();
   //Text
@@ -315,7 +336,7 @@ function drawStatusPLUS() {
   if (allSongsCount >= allSongs.length) {
     allSongsCount = 0;
   }
-  fill(255);
+  fill(50);
   //print(calle13ResidenteSongsCount);
   text(allSongs[allSongsCount], (windowWidth / 2), (windowHeight / 2));
 
@@ -392,7 +413,7 @@ function initializeText() {
 
 
     var wordObj = counts[word];
-    wordObj.tfidf = wordObj.tf*log(files.length/wordObj.df);
+    wordObj.tfidf = wordObj.tf * log(files.length / wordObj.df);
 
 
   }
